@@ -1,176 +1,443 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SnailyLuke</title>
+    <style>
+      :root {
+        --beige: hsl(35 24% 80%);
+        --green: hsl(143 15% 35%);
+        --blue: hsl(210 34% 63%);
+        --red: hsl(13 73% 42%);
+        --yellow: hsl(50 66% 80%);
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SnailyLuke</title>
-  <style>
-    :root {
-      --beige: hsl(35 24% 80%);
-      --green: hsl(143 15% 35%);
-      --blue: hsl(210 34% 63%);
-      --red: hsl(13 73% 42%);
-      --yellow: hsl(50 66% 80%);
+        overflow: hidden;
+      }
 
-      overflow: hidden;
-    }
+      body {
+        margin: 0;
+        background-color: var(--beige);
+        position: relative;
+        height: 100svh;
+        width: 100svw;
+        opacity: 0;
+        transition: opacity 100ms;
+        overflow: hidden;
+      }
 
-    body {
-      margin: 0;
-      background-color: var(--beige);
-      position: relative;
-      height: 100svh;
-      width: 100svw;
-      opacity: 0;
-      transition: opacity 100ms;
-      overflow: hidden;
-    }
-
-    body>* {
-      display: block;
-      position: absolute;
-      transform-origin: center;
-      inset: 0;
-
-      & svg {
+      body > * {
+        display: block;
+        position: absolute;
         transform-origin: center;
-        animation: var(--animation);
+        inset: 0;
+
+        & svg {
+          transform-origin: center;
+          animation: var(--animation);
+        }
+
+        & path {
+          fill: var(--color);
+        }
       }
 
-      & path {
-        fill: var(--color);
-      }
-    }
-
-    blue-blob {
-      --color: var(--blue);
-      --animation: rotating 100s infinite;
-      transform: translateX(50%) translateY(20%) scale(1.3);
-    }
-
-    yellow-blob {
-      --color: var(--yellow);
-      --animation: rotating 300s infinite;
-      transform: translateX(20%) translateY(-10%) scale(2);
-    }
-
-    green-blob {
-      --color: var(--green);
-      --animation: rotating 60s reverse infinite;
-      transform: translateY(130%) scale(3);
-    }
-
-    outline-blob {
-      --color: transparent;
-      --animation: rotating 100s reverse infinite;
-      transform: translateX(30%) translateY(-30%) scale(1.8);
-
-      & path {
-        stroke: var(--red);
-      }
-    }
-
-    @keyframes rotating {
-      from {
-        transform: rotate(0deg);
+      blue-blob {
+        --color: var(--blue);
+        --animation: rotating 100s infinite;
+        transform: translateX(50%) translateY(20%) scale(1.3);
       }
 
-      to {
-        transform: rotate(360deg);
+      yellow-blob {
+        --color: var(--yellow);
+        --animation: rotating 300s infinite;
+        transform: translateX(20%) translateY(-10%) scale(2);
       }
-    }
 
-    dvd-logo {
-      inset: unset;
-      top: 0;
-      left: 0;
-      --size: 120px;
-      width: var(--size);
-      height: var(--size);
-      transform-origin: top left;
-      transform: translateX(var(--x, 0px)) translateY(var(--y, 0px));
-      background: hsl(0 0 100 / .3);
-      border: 1px solid white;
-      mix-blend-mode: luminosity;
-    }
-
-    corner-hit-counter {
-      font-size: 4rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      font-weight: 500;
-      text-align: center;
-      display: flex;
-      place-items: center;
-      place-content: center;
-      color: white;
-
-      & p {
-        background-color: rgb(0 0 0 / 40%);
-        padding: 1rem;
+      green-blob {
+        --color: var(--green);
+        --animation: rotating 60s reverse infinite;
+        transform: translateY(130%) scale(3);
       }
-    }
 
-    countdown-timer {
-      font-size: 6rem;
-      font-family: monospace;
-      font-weight: 500;
-      display: flex;
-      place-items: end;
-      place-content: end;
-      color: white;
-      width: 15rem;
-      margin-inline: auto;
-    }
+      outline-blob {
+        --color: transparent;
+        --animation: rotating 100s reverse infinite;
+        transform: translateX(30%) translateY(-30%) scale(1.8);
 
-    title-text {
-      color: #000011;
-      padding: 4rem;
-      font-size: 6rem;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      font-weight: 700;
-      display: flex;
-    }
-  </style>
-  <script type="module" src="index.ts"></script>
-</head>
+        & path {
+          stroke: var(--red);
+        }
+      }
 
-<body>
-  <yellow-blob>
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M55.9,-44.4C71.3,-25.2,81.9,-2,76.5,15.7C71.1,33.5,49.6,45.9,28.4,54.4C7.2,62.8,-13.7,67.3,-28.3,59.8C-42.9,52.4,-51.3,33,-53,15.1C-54.7,-2.8,-49.7,-19.2,-39.7,-37.1C-29.8,-55.1,-14.9,-74.6,2.7,-76.7C20.2,-78.8,40.4,-63.6,55.9,-44.4Z"
-        transform="translate(100 100)" />
-    </svg>
-  </yellow-blob>
-  <outline-blob>
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M37.8,-43.6C41.9,-33.7,33.4,-16.8,35.1,1.7C36.8,20.2,48.7,40.4,44.6,45.3C40.4,50.2,20.2,39.7,2.9,36.8C-14.4,33.9,-28.8,38.5,-43,33.6C-57.2,28.8,-71.2,14.4,-67.2,4C-63.2,-6.3,-41.1,-12.6,-26.9,-22.6C-12.6,-32.5,-6.3,-46,5.3,-51.3C16.8,-56.5,33.7,-53.5,37.8,-43.6Z"
-        transform="translate(100 100)" />
-    </svg>
-  </outline-blob>
-  <green-blob>
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M43.4,-73.5C57.5,-67,71.2,-58,79.1,-45.3C87,-32.6,89.2,-16.3,89.1,-0.1C88.9,16.1,86.4,32.3,79.4,46.6C72.4,60.9,61,73.4,47,78.6C33.1,83.9,16.5,81.8,0.6,80.7C-15.2,79.6,-30.5,79.4,-44.2,74C-57.9,68.6,-70,58,-76.2,44.8C-82.4,31.6,-82.7,15.8,-80.9,1C-79.1,-13.7,-75.2,-27.4,-67.8,-38.6C-60.4,-49.8,-49.6,-58.4,-37.7,-66.3C-25.8,-74.1,-12.9,-81.2,0.9,-82.7C14.6,-84.2,29.2,-80.1,43.4,-73.5Z"
-        transform="translate(100 100)" />
-    </svg>
-  </green-blob>
-  <blue-blob>
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M50.6,-15.6C59.9,12,57.7,44.2,39.9,57.8C22.1,71.4,-11.2,66.3,-36,48.6C-60.8,30.8,-77.1,0.2,-69.7,-24.9C-62.3,-49.9,-31.1,-69.5,-5.2,-67.8C20.7,-66.1,41.4,-43.1,50.6,-15.6Z"
-        transform="translate(100 100)" />
-    </svg>
-  </blue-blob>
+      @keyframes rotating {
+        from {
+          transform: rotate(0deg);
+        }
 
-  <dvd-logo>
-    <img src=snale.png width="100%">
-  </dvd-logo>
-  <countdown-timer></countdown-timer>
-  <title-text></title-text>
-  <corner-hit-counter></corner-hit-counter>
-</body>
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
+      dvd-logo {
+        inset: unset;
+        top: 0;
+        left: 0;
+        --size: 120px;
+        width: var(--size);
+        height: var(--size);
+        transform-origin: top left;
+        transform: translateX(var(--x, 0px)) translateY(var(--y, 0px));
+        background: hsl(0 0 100 / 0.3);
+        border: 1px solid white;
+        mix-blend-mode: luminosity;
+      }
+
+      corner-hit-counter {
+        font-size: 4rem;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+        font-weight: 500;
+        text-align: center;
+        display: flex;
+        place-items: center;
+        place-content: center;
+        color: white;
+
+        & p {
+          background-color: rgb(0 0 0 / 40%);
+          padding: 1rem;
+        }
+      }
+
+      countdown-timer {
+        font-size: 6rem;
+        font-family: monospace;
+        font-weight: 500;
+        display: flex;
+        place-items: end;
+        place-content: end;
+        color: white;
+        width: 15rem;
+        margin-inline: auto;
+      }
+
+      title-text {
+        color: #000011;
+        padding: 4rem;
+        font-size: 6rem;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Oxygen,
+          Ubuntu,
+          Cantarell,
+          "Open Sans",
+          "Helvetica Neue",
+          sans-serif;
+        font-weight: 700;
+        display: flex;
+      }
+    </style>
+    <script type="module">
+      window.addEventListener("load", () => {
+        setTimeout(() => {
+          window.scroll({
+            top: 0,
+            left: 0,
+            behavior: "instant",
+          });
+          document.body.style.setProperty("opacity", "1");
+        }, 50);
+      });
+
+      customElements.define(
+        "corner-hit-counter",
+        class extends HTMLElement {
+          static observedAttributes = ["count"];
+          count = 0;
+
+          /**
+           * @param {string} name
+           * @param {string} oldValue
+           * @param {string} newValue
+           */
+          attributeChangedCallback(name, oldValue, newValue) {
+            if (name === "count") {
+              this.count = +newValue;
+              this.hidden = this.count > 0;
+
+              if (this.count > 0) {
+                console.log("CORNER HIT", this.count, "AT", new Date());
+              }
+            }
+            this.render();
+          }
+
+          render() {
+            this.innerHTML = (() => {
+              switch (this.count) {
+                case 0:
+                  return ``;
+                case 1:
+                  return `<p>CORNER HIT</p>`;
+                default:
+                  return `<p>CORNER HIT ${this.count} TIMES</p>`;
+              }
+            })();
+          }
+        },
+      );
+
+      customElements.define(
+        "countdown-timer",
+        class extends HTMLElement {
+          constructor() {
+            super();
+            const url = new URL(window.location.href);
+            const time = Number(url.searchParams.get("time")) || 0;
+            this.target = new Date(Date.now() + time * 1000);
+          }
+
+          interval = 0;
+          connectedCallback() {
+            this.interval = setInterval(() => this.render(), 100);
+          }
+
+          disconnectedCallback() {
+            clearInterval(this.interval);
+          }
+
+          getCountdownTime() {
+            const now = new Date();
+            const difference = (this.target.valueOf() - now.valueOf()) / 1000;
+
+            return {
+              minutes: Math.max(Math.floor(difference / 60), 0),
+              seconds: Math.max(Math.floor(difference % 60), 0),
+            };
+          }
+
+          render() {
+            const { minutes, seconds } = this.getCountdownTime();
+            this.innerHTML = `<p>${minutes}:${String(seconds).padStart(2, "0")}</p>`;
+          }
+        },
+      );
+
+      customElements.define(
+        "dvd-logo",
+        class extends HTMLElement {
+          vx = Math.random() * 20 + 55;
+          //vx = this.MAX_X / 10
+          vy = Math.random() * 20 + 55;
+          //vy = this.MAX_Y / 10
+          xdir = Math.random() >= 0.5 ? 1 : -1;
+          ydir = Math.random() >= 0.5 ? 1 : -1;
+          MIN_X = 0;
+          get MAX_X() {
+            return document.body.clientWidth - this.clientWidth;
+          }
+          MIN_Y = 0;
+          get MAX_Y() {
+            return document.body.clientHeight - this.clientHeight;
+          }
+
+          #__x = Math.random() * this.MAX_X + this.MIN_X;
+          //#__x = 0;
+          set x(value) {
+            this.#__x = value;
+            this.style.setProperty("--x", `${value}px`);
+          }
+          get x() {
+            return this.#__x;
+          }
+
+          #__y = Math.random() * this.MAX_Y + this.MIN_Y;
+          //#__y = 0;
+          set y(value) {
+            this.#__y = value;
+            this.style.setProperty("--y", `${value}px`);
+          }
+          get y() {
+            return this.#__y;
+          }
+
+          connectedCallback() {
+            const counter = document.querySelector("corner-hit-counter");
+
+            let prevT = 0;
+            /** @param {number} t */
+            const step = (t) => {
+              const dt = t - prevT;
+              const dx = (this.vx * dt * this.xdir) / 500;
+              const dy = (this.vy * dt * this.ydir) / 500;
+              prevT = t;
+
+              let newX = clamp(this.MIN_X, this.x + dx, this.MAX_X);
+              let newY = clamp(this.MIN_Y, this.y + dy, this.MAX_Y);
+              if (newX >= this.MAX_X) this.xdir = -1;
+              else if (newX <= this.MIN_X) this.xdir = 1;
+              if (newY >= this.MAX_Y) this.ydir = -1;
+              else if (newY <= this.MIN_Y) this.ydir = 1;
+
+              if (
+                (newX === this.MIN_X || newX === this.MAX_X) &&
+                (newY === this.MIN_Y || newY === this.MAX_Y)
+              ) {
+                const count = Number(counter?.getAttribute("count")) || 0;
+                counter?.setAttribute("count", String(count + 1));
+              }
+
+              this.x = newX;
+              this.y = newY;
+
+              requestAnimationFrame(step);
+            };
+            step(prevT);
+          }
+        },
+      );
+
+      /**
+       * @param {number} min
+       * @param {number} target
+       * @param {number} max
+       */
+      function clamp(min, target, max) {
+        return Math.max(min, Math.min(target, max));
+      }
+
+      customElements.define(
+        "title-text",
+        class extends HTMLElement {
+          dots = "";
+          when = "soon";
+
+          whenIsChanging = false;
+          /** @param {string} target */
+          setWhen(target, interval = 100) {
+            if (this.whenIsChanging) return;
+            this.whenIsChanging = true;
+            const remove = () => {
+              if (
+                this.when.length === 0 ||
+                target.slice(0, this.when.length) === this.when
+              ) {
+                setTimeout(add, interval);
+              } else {
+                this.when = this.when.slice(0, this.when.length - 1);
+                setTimeout(remove, interval);
+              }
+            };
+
+            const add = () => {
+              this.when = target.slice(0, this.when.length + 1);
+              if (this.when !== target) setTimeout(add, interval);
+              else {
+                this.whenIsChanging = false;
+              }
+            };
+
+            remove();
+          }
+
+          connectedCallback() {
+            this.render();
+          }
+
+          INTERVAL = 100;
+          RATIO = 1000 / this.INTERVAL;
+
+          render(time = 0) {
+            const seconds = time / 1000;
+            const dotTime = Math.floor(seconds % 12);
+            if (dotTime === 2) this.dots = ".";
+            else if (dotTime === 4) this.dots = "..";
+            else if (dotTime === 6) this.dots = "...";
+            if (dotTime == 0) this.dots = "";
+
+            if (Math.floor(seconds) === 60) this.setWhen("soonish");
+            if (Math.floor(seconds) === 70) this.setWhen("soon");
+            if (Math.floor(seconds) === 100) this.setWhen("sometime");
+            if (Math.floor(seconds) === 120) this.setWhen("eventually");
+            if (Math.floor(seconds) === 240) this.setWhen("I swear");
+            if (Math.floor(seconds) === 600) this.setWhen("maybe, hopefully");
+
+            const text = `Stream will begin ${this.when}${this.dots}`;
+            if (text !== this.textContent) this.textContent = text;
+            requestAnimationFrame(this.render.bind(this));
+          }
+        },
+      );
+
+      /**
+       * @param {number} num
+       * @param {number} min
+       * @param {number} max
+       */
+      function isBetween(num, min, max) {
+        return num >= min && num <= max;
+      }
+    </script>
+  </head>
+
+  <body>
+    <yellow-blob>
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M55.9,-44.4C71.3,-25.2,81.9,-2,76.5,15.7C71.1,33.5,49.6,45.9,28.4,54.4C7.2,62.8,-13.7,67.3,-28.3,59.8C-42.9,52.4,-51.3,33,-53,15.1C-54.7,-2.8,-49.7,-19.2,-39.7,-37.1C-29.8,-55.1,-14.9,-74.6,2.7,-76.7C20.2,-78.8,40.4,-63.6,55.9,-44.4Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+    </yellow-blob>
+    <outline-blob>
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M37.8,-43.6C41.9,-33.7,33.4,-16.8,35.1,1.7C36.8,20.2,48.7,40.4,44.6,45.3C40.4,50.2,20.2,39.7,2.9,36.8C-14.4,33.9,-28.8,38.5,-43,33.6C-57.2,28.8,-71.2,14.4,-67.2,4C-63.2,-6.3,-41.1,-12.6,-26.9,-22.6C-12.6,-32.5,-6.3,-46,5.3,-51.3C16.8,-56.5,33.7,-53.5,37.8,-43.6Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+    </outline-blob>
+    <green-blob>
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M43.4,-73.5C57.5,-67,71.2,-58,79.1,-45.3C87,-32.6,89.2,-16.3,89.1,-0.1C88.9,16.1,86.4,32.3,79.4,46.6C72.4,60.9,61,73.4,47,78.6C33.1,83.9,16.5,81.8,0.6,80.7C-15.2,79.6,-30.5,79.4,-44.2,74C-57.9,68.6,-70,58,-76.2,44.8C-82.4,31.6,-82.7,15.8,-80.9,1C-79.1,-13.7,-75.2,-27.4,-67.8,-38.6C-60.4,-49.8,-49.6,-58.4,-37.7,-66.3C-25.8,-74.1,-12.9,-81.2,0.9,-82.7C14.6,-84.2,29.2,-80.1,43.4,-73.5Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+    </green-blob>
+    <blue-blob>
+      <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M50.6,-15.6C59.9,12,57.7,44.2,39.9,57.8C22.1,71.4,-11.2,66.3,-36,48.6C-60.8,30.8,-77.1,0.2,-69.7,-24.9C-62.3,-49.9,-31.1,-69.5,-5.2,-67.8C20.7,-66.1,41.4,-43.1,50.6,-15.6Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+    </blue-blob>
+
+    <dvd-logo>
+      <img src="snale.png" width="100%" />
+    </dvd-logo>
+
+    <countdown-timer></countdown-timer>
+
+    <title-text></title-text>
+
+    <corner-hit-counter></corner-hit-counter>
+  </body>
 </html>
