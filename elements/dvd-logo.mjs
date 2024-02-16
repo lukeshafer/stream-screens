@@ -43,7 +43,10 @@ customElements.define(
         if (document.hidden) paused = true;
       });
 
+      const margin = 2;
+
       let prevT = 0;
+      let hitting = false;
       /** @param {number} t */
       const step = (t) => {
         if (paused) {
@@ -63,12 +66,15 @@ customElements.define(
         else if (newY <= this.MIN_Y) this.ydir = 1;
 
         if (
-          (newX === this.MIN_X || newX === this.MAX_X) &&
-          (newY === this.MIN_Y || newY === this.MAX_Y)
+          (newX <= this.MIN_X + margin || newX >= this.MAX_X - margin) &&
+          (newY <= this.MIN_Y + margin || newY >= this.MAX_Y - margin)
         ) {
-          const count = Number(counter?.getAttribute("count")) || 0;
-          counter?.setAttribute("count", String(count + 1));
-        }
+          if (!hitting) {
+            const count = Number(counter?.getAttribute("count")) || 0;
+            counter?.setAttribute("count", String(count + 1));
+          }
+          hitting = true;
+        } else if (hitting) hitting = false;
 
         this.x = newX;
         this.y = newY;

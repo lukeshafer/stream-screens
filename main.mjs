@@ -1,7 +1,8 @@
-import "./elements/dvd-logo.mjs"
-import "./elements/title-text.mjs"
-import "./elements/countdown-timer.mjs"
-import "./elements/corner-hit-counter.mjs"
+import "./elements/dvd-logo.mjs";
+import "./elements/title-text.mjs";
+import "./elements/countdown-timer.mjs";
+import "./elements/corner-hit-counter.mjs";
+import "./elements/the-blobs.mjs";
 
 try {
   if (import.meta.env.MODE === "development") {
@@ -24,6 +25,6 @@ window.addEventListener("load", () => {
  * @param {number} min
  * @param {number} max
  */
-window.isBetween = function isBetween(num, min, max) {
-  return num >= min && num <= max;
-};
+//window.isBetween = function isBetween(num, min, max) {
+//return num >= min && num <= max;
+//};
