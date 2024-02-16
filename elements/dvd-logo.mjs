@@ -20,7 +20,7 @@ customElements.define(
     //#__x = 0;
     set x(value) {
       this.#__x = value;
-      this.style.setProperty("--x", `${value}px`);
+      this.style.setProperty("--x", `${Math.round(value)}px`);
     }
     get x() {
       return this.#__x;
@@ -30,7 +30,7 @@ customElements.define(
     //#__y = 0;
     set y(value) {
       this.#__y = value;
-      this.style.setProperty("--y", `${value}px`);
+      this.style.setProperty("--y", `${Math.round(value)}px`);
     }
     get y() {
       return this.#__y;
@@ -38,10 +38,18 @@ customElements.define(
 
     connectedCallback() {
       const counter = document.querySelector("corner-hit-counter");
+      let paused = false;
+      document.addEventListener("visibilitychange", (e) => {
+        if (document.hidden) paused = true;
+      });
 
       let prevT = 0;
       /** @param {number} t */
       const step = (t) => {
+        if (paused) {
+          prevT = t;
+          paused = false;
+        }
         const dt = t - prevT;
         const dx = (this.vx * dt * this.xdir) / 500;
         const dy = (this.vy * dt * this.ydir) / 500;

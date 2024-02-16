@@ -4,8 +4,25 @@ customElements.define(
     constructor() {
       super();
       const url = new URL(window.location.href);
-      const time = Number(url.searchParams.get("time")) || 0;
-      this.target = new Date(Date.now() + time * 1000);
+      this.target = new Date(Date.now() + this.timer() * 1000);
+    }
+
+    timer() {
+      const url = new URL(window.location.href);
+      const time =
+        url.searchParams.get("time") ||
+        url.searchParams.get("timer") ||
+        url.searchParams.get("seconds");
+
+      if (!time) return 0;
+
+      if (Number(time)) return Number(time);
+
+      const [m, s] = time.split(/[\D]+/);
+      if (+m && +s) {
+        return +m * 60 + +s;
+      }
+      return 0;
     }
 
     interval = 0;
@@ -27,9 +44,14 @@ customElements.define(
       };
     }
 
+    prevRender = "";
     render() {
       const { minutes, seconds } = this.getCountdownTime();
-      this.innerHTML = `<p>${minutes}:${String(seconds).padStart(2, "0")}</p>`;
+      const newRender = `<p>${minutes}:${String(seconds).padStart(2, "0")}</p>`;
+      if (this.prevRender !== newRender) {
+        this.innerHTML = newRender;
+        this.prevRender = newRender;
+      }
     }
   },
 );
