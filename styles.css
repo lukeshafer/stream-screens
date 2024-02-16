@@ -1,0 +1,149 @@
+:root {
+  --beige: hsl(35 24% 80%);
+  --green: hsl(143 15% 35%);
+  --blue: hsl(210 34% 63%);
+  --red: hsl(13 73% 42%);
+  --yellow: hsl(50 66% 80%);
+
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background-color: var(--beige);
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0;
+  transition: opacity 100ms;
+  overflow: hidden;
+}
+
+body>* {
+  display: block;
+  position: absolute;
+  transform-origin: center;
+  inset: 0;
+}
+
+svg {
+  transform-origin: center;
+  animation: var(--animation);
+}
+
+path {
+  fill: var(--color);
+}
+
+blue-blob {
+  --color: var(--blue);
+  --animation: rotating 100s linear infinite;
+  transform: translateX(50%) translateY(20%) scale(1.3);
+}
+
+yellow-blob {
+  --color: var(--yellow);
+  --animation: rotating 300s linear infinite;
+  transform: translateX(20%) translateY(-10%) scale(2);
+}
+
+green-blob {
+  --color: var(--green);
+  --animation: rotating 60s reverse linear infinite;
+  transform: translateY(130%) scale(3);
+}
+
+outline-blob {
+  --color: transparent;
+  --animation: rotating 100s reverse linear infinite;
+  transform: translateX(30%) translateY(-30%) scale(1.8);
+}
+
+outline-blob path {
+  stroke: var(--red);
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+dvd-logo {
+  inset: unset;
+  top: 0;
+  left: 0;
+  --size: 120px;
+  width: var(--size);
+  height: var(--size);
+  transform-origin: top left;
+  transform: translateX(var(--x, 0px)) translateY(var(--y, 0px));
+  background: hsla(0, 0%, 100%, 0.2);
+  border: 2px solid hsla(0, 0%, 100%, 0.2);
+  mix-blend-mode: luminosity;
+}
+
+corner-hit-counter {
+  font-size: 4rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  font-weight: 500;
+  text-align: center;
+  display: flex;
+  place-items: center;
+  place-content: center;
+  color: white;
+}
+
+corner-hit-counter p {
+  background-color: rgb(0 0 0 / 40%);
+  padding: 1rem;
+}
+
+countdown-timer {
+  font-size: 8rem;
+  font-family: monospace;
+  font-weight: 700;
+  display: flex;
+  place-items: end;
+  place-content: end;
+  color: white;
+  width: 15rem;
+  margin-inline: auto;
+  --shadow: rgb(2 2 2 / 0.4);
+  text-shadow: -4px 4px var(--shadow);
+}
+
+title-text {
+  color: #000011;
+  padding: 4rem;
+  font-size: 6rem;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  font-weight: 700;
+  display: flex;
+}
