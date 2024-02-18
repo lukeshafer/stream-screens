@@ -8,6 +8,7 @@ customElements.define(
     xdir = Math.random() >= 0.5 ? 1 : -1;
     ydir = Math.random() >= 0.5 ? 1 : -1;
     MIN_X = 0;
+
     get MAX_X() {
       return document.body.clientWidth - this.clientWidth;
     }
@@ -37,6 +38,7 @@ customElements.define(
     }
 
     connectedCallback() {
+      this.innerHTML = '<img src="snale.png" width="100%" />';
       const counter = document.querySelector("corner-hit-counter");
       let paused = false;
       document.addEventListener("visibilitychange", (e) => {

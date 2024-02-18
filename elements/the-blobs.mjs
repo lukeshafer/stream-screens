@@ -1,6 +1,6 @@
 customElements.define(
   "the-blobs",
-  class extends HTMLElement {
+  class TheBlobs extends HTMLElement {
     connectedCallback() {
       this.innerHTML = `
     <yellow-blob>

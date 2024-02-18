@@ -9,6 +9,21 @@ try {
     document.title = "DEV MODE Intro";
   }
 } catch { }
+
+(function checkForFilters() {
+  const url = new URL(window.location.href);
+  const filters = url.searchParams.getAll("el");
+  if (filters.length === 0) return;
+
+  document.body.innerHTML = "";
+  filters.forEach((f) => {
+    try {
+      const el = document.createElement(f);
+      document.body.appendChild(el);
+    } catch { }
+  });
+})();
+
 window.addEventListener("load", () => {
   setTimeout(() => {
     window.scroll({
@@ -19,12 +34,3 @@ window.addEventListener("load", () => {
     document.body.style.setProperty("opacity", "1");
   }, 50);
 });
-
-/**
- * @param {number} num
- * @param {number} min
- * @param {number} max
- */
-//window.isBetween = function isBetween(num, min, max) {
-//return num >= min && num <= max;
-//};
